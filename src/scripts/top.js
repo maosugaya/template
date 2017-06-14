@@ -4,6 +4,9 @@ const $window = $(window);
 const animationClassName = 'is-animate';
 const simpleParallax = new SimpleParallax();
 
+const $scrollDownTicker = $('.js-MainVisual__scrollDownTicker');
+let isNotScrolled = true;
+
 function asyncExec (cb, time = 0) {
   setTimeout(cb, time);
 }
@@ -45,8 +48,25 @@ function mainvisualAnimation() {
 }
 
 $(() => {
-  simpleParallax.addElement('.js-MainVisual__image',  simpleParallax.checkIsPortrait() ? 0.2 : 0.4);
+  simpleParallax.addElement('.js-MainVisual__image',  simpleParallax.checkIsPortrait() ? 0.2 : 0.4, true);
   simpleParallax.init();
+
+
+
+  let angle = 0;
+  const waveAnimation = () => {
+    angle++;
+    console.log(Math.sin(angle))
+    requestAnimationFrame(waveAnimation);
+  }
+  requestAnimationFrame(waveAnimation);
+
 });
 
 $window.on('load', mainvisualAnimationSinglePhoto);
+$window.on('scroll', () => {
+  if(isNotScrolled) {
+    $scrollDownTicker.addClass('is-scrolled');
+    isNotScrolled = false;
+  }
+});

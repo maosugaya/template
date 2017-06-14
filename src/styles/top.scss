@@ -16,6 +16,7 @@
 
 .MainVisual {
   overflow: hidden;
+  position: relative;
 
   &__image {
     height: auto;
@@ -39,6 +40,26 @@
         animation: mainvisual-animation 2s linear;
       }
     };
+  }
+
+  &__scrollDownTicker {
+    $width: 50px;
+    position: absolute;
+    left: 50%;
+    margin-left: -$width / 2;
+    bottom: 20px;
+    width: $width;
+    height: 50px;
+    background-image: url('../images/standalone/common/scrolldown.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: opacity ease .4s;
+    //animation: updown linear 5s infinite;
+
+    &.is-scrolled {
+      opacity: 0;
+    }
   }
 }
 
